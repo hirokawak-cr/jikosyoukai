@@ -9,255 +9,243 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
+      background: #f0f2f5;
+      color: #1a1a2e;
       min-height: 100vh;
       line-height: 1.6;
     }
 
-    /* ── Hero ── */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 5rem 1.5rem 4rem;
-      text-align: center;
-      background: linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #0f2a4a 100%);
+    /* ── Top accent bar ── */
+    .top-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #4f6ef7, #38bdf8);
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -80px; left: 50%;
-      transform: translateX(-50%);
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
-      pointer-events: none;
+    /* ── Hero ── */
+    .hero {
+      background: #fff;
+      border-bottom: 1px solid #e8eaed;
+    }
+
+    .hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.75rem;
     }
 
     .avatar {
-      position: relative;
-      width: 96px; height: 96px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #3b82f6);
+      background: linear-gradient(135deg, #4f6ef7, #38bdf8);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 30px;
+      font-size: 26px;
       font-weight: 700;
       color: #fff;
-      margin: 0 auto 1.5rem;
-      box-shadow: 0 0 0 4px rgba(99,102,241,0.3), 0 20px 40px rgba(0,0,0,0.4);
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(79,110,247,0.3);
     }
 
+    .hero-info { flex: 1; }
+
     .hero-name {
-      font-size: 32px;
+      font-size: 24px;
       font-weight: 700;
-      color: #f8fafc;
-      letter-spacing: 0.02em;
-      margin-bottom: 6px;
+      color: #111827;
+      margin-bottom: 4px;
     }
 
     .hero-title {
       font-size: 13px;
-      font-weight: 500;
-      color: #818cf8;
-      letter-spacing: 0.12em;
+      color: #4f6ef7;
+      font-weight: 600;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      margin-bottom: 1.25rem;
+      margin-bottom: 10px;
     }
 
     .hero-tagline {
-      font-size: 15px;
-      color: #94a3b8;
-      line-height: 1.8;
-      max-width: 460px;
-      margin: 0 auto 1.75rem;
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.75;
+      margin-bottom: 14px;
+      max-width: 520px;
     }
 
-    .hero-badges {
+    .hero-meta {
       display: flex;
-      justify-content: center;
-      gap: 8px;
       flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .hero-badge {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 999px;
-      padding: 5px 16px;
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
       font-size: 13px;
-      color: #cbd5e1;
-      backdrop-filter: blur(4px);
+      color: #9ca3af;
+    }
+
+    .hero-meta-icon {
+      font-size: 14px;
     }
 
     /* ── Layout ── */
-    .content {
-      max-width: 760px;
+    .layout {
+      max-width: 800px;
       margin: 0 auto;
-      padding: 2rem 1.25rem 5rem;
-      display: flex;
-      flex-direction: column;
+      padding: 1.5rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 260px;
       gap: 1.25rem;
+      align-items: start;
     }
+
+    @media (max-width: 640px) {
+      .layout { grid-template-columns: 1fr; }
+      .hero-inner { flex-direction: column; align-items: center; text-align: center; }
+      .hero-meta { justify-content: center; }
+    }
+
+    .main-col { display: flex; flex-direction: column; gap: 1.25rem; }
+    .side-col { display: flex; flex-direction: column; gap: 1.25rem; }
 
     /* ── Card ── */
     .card {
-      background: #1e293b;
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
-      padding: 1.75rem;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 1.25rem;
-    }
-
-    .card-icon {
-      width: 32px; height: 32px;
-      border-radius: 9px;
-      background: linear-gradient(135deg, #6366f1, #3b82f6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      flex-shrink: 0;
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
     }
 
     .card-title {
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 700;
-      color: #64748b;
+      color: #374151;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      margin-bottom: 1.1rem;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f3f4f6;
+      display: flex;
+      align-items: center;
+      gap: 7px;
     }
 
-    /* ── Sales point ── */
-    .sales-text {
-      font-size: 15px;
-      color: #cbd5e1;
+    .card-title-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4f6ef7;
+      flex-shrink: 0;
+    }
+
+    /* ── Self PR ── */
+    .pr-text {
+      font-size: 14px;
+      color: #4b5563;
       line-height: 1.85;
-      border-left: 3px solid #6366f1;
-      padding-left: 1.25rem;
+      background: #f8f9ff;
+      border-left: 3px solid #4f6ef7;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
     }
 
     /* ── Skills ── */
-    .skill-group { margin-bottom: 1.25rem; }
+    .skill-group { margin-bottom: 1.1rem; }
     .skill-group:last-child { margin-bottom: 0; }
 
-    .skill-label {
+    .skill-group-label {
       font-size: 11px;
       font-weight: 600;
-      color: #475569;
+      color: #9ca3af;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 10px;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
     }
 
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 7px;
     }
 
     .skill-tag {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 6px 14px;
-      font-size: 13px;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 12px;
       font-weight: 500;
-      color: #94a3b8;
-      transition: all 0.2s;
+      color: #374151;
     }
 
     .skill-tag.primary {
-      background: rgba(99,102,241,0.15);
-      border-color: rgba(99,102,241,0.4);
-      color: #a5b4fc;
+      background: #eff2ff;
+      border-color: #c7d2fe;
+      color: #4338ca;
     }
 
     /* ── Timeline ── */
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
+    .timeline { display: flex; flex-direction: column; }
 
     .tl-item {
-      display: grid;
-      grid-template-columns: 90px 1fr;
-      gap: 0 1.25rem;
       position: relative;
+      padding-left: 1.5rem;
+      padding-bottom: 1.5rem;
     }
 
-    .tl-item + .tl-item { margin-top: 1.5rem; }
+    .tl-item:last-child { padding-bottom: 0; }
 
-    .tl-left {
-      text-align: right;
-      padding-top: 2px;
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: 5px; top: 14px; bottom: 0;
+      width: 1px;
+      background: #e5e7eb;
+    }
+
+    .tl-item:last-child::before { display: none; }
+
+    .tl-dot {
+      position: absolute;
+      left: 0; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #4f6ef7;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px #c7d2fe;
     }
 
     .tl-period {
       font-size: 11px;
-      color: #475569;
-      line-height: 1.5;
-      white-space: pre-line;
-    }
-
-    .tl-right {
-      position: relative;
-      padding-left: 1.25rem;
-      padding-bottom: 1.5rem;
-    }
-
-    .tl-item:last-child .tl-right {
-      padding-bottom: 0;
-    }
-
-    .tl-right::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 8px; bottom: -1.5rem;
-      width: 1px;
-      background: rgba(99,102,241,0.25);
-    }
-
-    .tl-item:last-child .tl-right::before {
-      display: none;
-    }
-
-    .tl-dot {
-      position: absolute;
-      left: -5px; top: 6px;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+      color: #9ca3af;
+      margin-bottom: 3px;
+      font-weight: 500;
     }
 
     .tl-company {
-      font-size: 15px;
-      font-weight: 600;
-      color: #f1f5f9;
-      margin-bottom: 3px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 2px;
     }
 
     .tl-role {
-      font-size: 13px;
-      color: #64748b;
-      margin-bottom: 8px;
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 7px;
     }
 
     .tl-desc {
-      font-size: 13px;
-      color: #94a3b8;
+      font-size: 12px;
+      color: #6b7280;
       line-height: 1.7;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .tl-tags {
@@ -267,249 +255,208 @@
     }
 
     .tl-tag {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 5px;
-      padding: 2px 10px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      padding: 2px 8px;
       font-size: 11px;
-      color: #64748b;
+      color: #9ca3af;
     }
 
-    /* ── Certs ── */
-    .cert-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    /* ── Sidebar: Certs ── */
+    .cert-list { display: flex; flex-direction: column; gap: 8px; }
 
     .cert-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 12px;
-      padding: 14px 18px;
+      background: #f9fafb;
+      border: 1px solid #f3f4f6;
+      border-radius: 8px;
+      padding: 10px 12px;
     }
 
     .cert-name {
-      font-size: 14px;
-      font-weight: 500;
-      color: #e2e8f0;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 4px;
     }
 
-    .cert-right {
+    .cert-foot {
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: space-between;
     }
 
     .cert-date {
-      font-size: 12px;
-      color: #475569;
+      font-size: 11px;
+      color: #9ca3af;
     }
 
     .cert-badge {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
       border-radius: 999px;
-      background: rgba(99,102,241,0.2);
-      color: #a5b4fc;
-      border: 1px solid rgba(99,102,241,0.3);
+      background: #eff2ff;
+      color: #4338ca;
     }
 
     .cert-badge.planned {
-      background: rgba(251,146,60,0.15);
-      color: #fb923c;
-      border-color: rgba(251,146,60,0.3);
+      background: #fff7ed;
+      color: #c2410c;
     }
 
-    /* ── Learning ── */
-    .learn-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    @media (max-width: 520px) {
-      .learn-grid { grid-template-columns: 1fr; }
-      .tl-item { grid-template-columns: 70px 1fr; }
-    }
-
-    .learn-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 12px;
-      padding: 16px;
-    }
-
-    .learn-card-label {
-      font-size: 10px;
-      font-weight: 700;
-      color: #475569;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 10px;
-    }
+    /* ── Sidebar: Learning ── */
+    .learn-list { display: flex; flex-direction: column; gap: 8px; }
 
     .learn-item {
       display: flex;
+      align-items: flex-start;
       gap: 8px;
       font-size: 13px;
-      color: #94a3b8;
-      line-height: 1.55;
-      margin-bottom: 7px;
+      color: #4b5563;
+      line-height: 1.5;
     }
 
-    .learn-item:last-child { margin-bottom: 0; }
-
     .learn-dot {
-      width: 5px; height: 5px;
+      width: 6px; height: 6px;
       border-radius: 50%;
-      background: #6366f1;
+      background: #4f6ef7;
       margin-top: 7px;
       flex-shrink: 0;
     }
 
-    /* ── Goal ── */
-    .goal-card {
-      background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(59,130,246,0.08));
-      border: 1px solid rgba(99,102,241,0.25);
-      border-radius: 14px;
-      padding: 1.5rem;
+    /* ── Goal card ── */
+    .goal-box {
+      background: linear-gradient(135deg, #eff2ff, #f0f9ff);
+      border: 1px solid #c7d2fe;
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
     }
 
     .goal-title {
-      font-size: 17px;
+      font-size: 13px;
       font-weight: 700;
-      color: #c7d2fe;
-      margin-bottom: 10px;
-      line-height: 1.4;
+      color: #3730a3;
+      margin-bottom: 7px;
+      line-height: 1.5;
     }
 
     .goal-desc {
-      font-size: 14px;
-      color: #94a3b8;
-      line-height: 1.8;
+      font-size: 12px;
+      color: #6366f1;
+      line-height: 1.75;
     }
 
     /* ── Basic info ── */
-    .info-rows {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .info-list { display: flex; flex-direction: column; gap: 8px; }
 
     .info-row {
       display: flex;
-      gap: 16px;
-      font-size: 14px;
+      gap: 10px;
+      font-size: 13px;
     }
 
     .info-key {
-      color: #475569;
-      min-width: 72px;
+      color: #9ca3af;
+      min-width: 64px;
       flex-shrink: 0;
+      font-weight: 500;
     }
 
-    .info-val { color: #cbd5e1; }
+    .info-val { color: #374151; }
 
     /* ── Footer ── */
-    .footer {
+    footer {
       text-align: center;
-      padding: 1.5rem 0 0;
+      padding: 2rem 0;
       font-size: 12px;
-      color: #334155;
+      color: #d1d5db;
     }
   </style>
 </head>
 <body>
 
+  <div class="top-bar"></div>
+
   <!-- Hero -->
   <div class="hero">
-    <div class="avatar">廣</div>
-    <div class="hero-name">廣川 生成</div>
-    <div class="hero-title">Network &amp; Infrastructure Engineer</div>
-    <p class="hero-tagline">
-      ファイアウォール運用・構築を軸に10年以上の実績。<br>
-      オンプレミスとクラウドをつなぐインフラエンジニアを目指しています。
-    </p>
-    <div class="hero-badges">
-      <span class="hero-badge">神奈川県藤沢市</span>
-      <span class="hero-badge">フリーランス</span>
-      <span class="hero-badge">インフラ構築・運用</span>
+    <div class="hero-inner">
+      <div class="avatar">廣</div>
+      <div class="hero-info">
+        <div class="hero-name">廣川 生成</div>
+        <div class="hero-title">Network &amp; Infrastructure Engineer</div>
+        <p class="hero-tagline">
+          ファイアウォール運用・構築を軸に10年以上の実績。<br>
+          オンプレミスとクラウドをつなぐインフラエンジニアを目指しています。
+        </p>
+        <div class="hero-meta">
+          <span class="hero-meta-item"><span class="hero-meta-icon">📍</span>神奈川県藤沢市</span>
+          <span class="hero-meta-item"><span class="hero-meta-icon">🎓</span>専門学卒（高度情報処理学科）</span>
+          <span class="hero-meta-item"><span class="hero-meta-icon">💼</span>フリーランス</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="content">
+  <!-- Content -->
+  <div class="layout">
 
-    <!-- 自己PR -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon">💬</div>
-        <div class="card-title">自己PR</div>
-      </div>
-      <p class="sales-text">
-        持前の観察力でコミュニケーションを図り、積極的に知識と技術を習得します。<br>
-        運用業務で培った「なぜ動かないか」を追う姿勢を、構築・改善にも活かしています。
-      </p>
-    </div>
+    <!-- メインカラム -->
+    <div class="main-col">
 
-    <!-- スキル -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon">🛠</div>
-        <div class="card-title">スキル</div>
+      <!-- 自己PR -->
+      <div class="card">
+        <div class="card-title"><span class="card-title-dot"></span>自己PR</div>
+        <p class="pr-text">
+          持前の観察力でコミュニケーションを図り、積極的に知識と技術を習得します。<br>
+          運用業務で培った「なぜ動かないか」を追う姿勢を、構築・改善にも活かしています。
+        </p>
       </div>
 
-      <div class="skill-group">
-        <div class="skill-label">ファイアウォール</div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Paloalto</span>
-          <span class="skill-tag primary">Fortigate</span>
-          <span class="skill-tag primary">FortiManager</span>
-          <span class="skill-tag">Juniper SSG</span>
-        </div>
-      </div>
+      <!-- スキル -->
+      <div class="card">
+        <div class="card-title"><span class="card-title-dot"></span>スキル</div>
 
-      <div class="skill-group">
-        <div class="skill-label">ネットワーク</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Cisco ルータ／スイッチ</span>
-          <span class="skill-tag">Alaxala L2SW</span>
-          <span class="skill-tag">ルーティング（静的・動的）</span>
-          <span class="skill-tag">NAT / ACL</span>
-          <span class="skill-tag">VPN</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-label">クラウド / OS / その他</div>
-        <div class="skill-tags">
-          <span class="skill-tag">AWS（EC2・VPC・VPN）</span>
-          <span class="skill-tag">Linux（CentOS / Ubuntu）</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">Word / Excel / PowerPoint</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 職歴 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon">📋</div>
-        <div class="card-title">職歴</div>
-      </div>
-      <div class="timeline">
-
-        <div class="tl-item">
-          <div class="tl-left">
-            <div class="tl-period">2016/3<br>〜 現在</div>
+        <div class="skill-group">
+          <div class="skill-group-label">ファイアウォール</div>
+          <div class="skill-tags">
+            <span class="skill-tag primary">Paloalto</span>
+            <span class="skill-tag primary">Fortigate</span>
+            <span class="skill-tag primary">FortiManager</span>
+            <span class="skill-tag">Juniper SSG</span>
           </div>
-          <div class="tl-right">
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-label">ネットワーク</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Cisco ルータ／スイッチ</span>
+            <span class="skill-tag">Alaxala L2SW</span>
+            <span class="skill-tag">ルーティング（静的・動的）</span>
+            <span class="skill-tag">NAT / ACL</span>
+            <span class="skill-tag">VPN</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-label">クラウド / OS / その他</div>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS（EC2・VPC・VPN）</span>
+            <span class="skill-tag">Linux（CentOS / Ubuntu）</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 職歴 -->
+      <div class="card">
+        <div class="card-title"><span class="card-title-dot"></span>職歴</div>
+        <div class="timeline">
+
+          <div class="tl-item">
             <div class="tl-dot"></div>
+            <div class="tl-period">2016/3 〜 現在</div>
             <div class="tl-company">日立システムズ</div>
             <div class="tl-role">ネットワーク運用・構築業務（メンバー）</div>
             <div class="tl-desc">
@@ -525,25 +472,17 @@
               <span class="tl-tag">Alaxala L2SW</span>
             </div>
           </div>
-        </div>
 
-        <div class="tl-item">
-          <div class="tl-left">
-            <div class="tl-period">2015/9<br>〜 2016/3</div>
-          </div>
-          <div class="tl-right">
+          <div class="tl-item">
             <div class="tl-dot"></div>
+            <div class="tl-period">2015/9 〜 2016/3</div>
             <div class="tl-company">某病院 移転に伴うNW構築</div>
             <div class="tl-role">概要設計・提案書作成サポート（メンバー）</div>
           </div>
-        </div>
 
-        <div class="tl-item">
-          <div class="tl-left">
-            <div class="tl-period">2015/4<br>〜 2015/8</div>
-          </div>
-          <div class="tl-right">
+          <div class="tl-item">
             <div class="tl-dot"></div>
+            <div class="tl-period">2015/4 〜 2015/8</div>
             <div class="tl-company">トーテックアメニティ株式会社</div>
             <div class="tl-role">ネットワーク・Linuxサーバ基礎研修</div>
             <div class="tl-tags">
@@ -552,61 +491,68 @@
               <span class="tl-tag">Apache / DNS / Mail</span>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
+
+      <!-- 目指すエンジニア像 -->
+      <div class="card">
+        <div class="card-title"><span class="card-title-dot"></span>目指すエンジニア像</div>
+        <div class="goal-box">
+          <div class="goal-title">オンプレミス × クラウドをつなぐ、ネットワーク・クラウド戦略エンジニア</div>
+          <div class="goal-desc">
+            10年以上のFW運用・構築経験を軸に、AWSなどクラウド技術を組み合わせ、
+            オンプレとクラウドをシームレスに連携させるインフラ設計・提案ができるエンジニアを目指しています。
+            AIツールの活用も取り入れながら、運用効率の向上にも貢献していきます。
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- 資格 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon">🏅</div>
-        <div class="card-title">資格</div>
-      </div>
-      <div class="cert-list">
-        <div class="cert-item">
-          <div class="cert-name">CCNA</div>
-          <div class="cert-right">
-            <span class="cert-date">2015/7/16</span>
-            <span class="cert-badge">取得済み</span>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-name">CCENT</div>
-          <div class="cert-right">
-            <span class="cert-date">2015/7/14</span>
-            <span class="cert-badge">取得済み</span>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-name">AWS Solutions Architect – Associate（SAA）</div>
-          <div class="cert-right">
-            <span class="cert-badge planned">取得予定</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- サイドカラム -->
+    <div class="side-col">
 
-    <!-- 現在の取り組み -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon">📈</div>
-        <div class="card-title">現在の取り組み</div>
+      <!-- 資格 -->
+      <div class="card">
+        <div class="card-title"><span class="card-title-dot"></span>資格</div>
+        <div class="cert-list">
+          <div class="cert-item">
+            <div class="cert-name">CCNA</div>
+            <div class="cert-foot">
+              <span class="cert-date">2015/7/16</span>
+              <span class="cert-badge">取得済み</span>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">CCENT</div>
+            <div class="cert-foot">
+              <span class="cert-date">2015/7/14</span>
+              <span class="cert-badge">取得済み</span>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">AWS SAA</div>
+            <div class="cert-foot">
+              <span class="cert-date">学習中</span>
+              <span class="cert-badge planned">取得予定</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="learn-grid">
-        <div class="learn-card">
-          <div class="learn-card-label">学習中</div>
+
+      <!-- 現在の取り組み -->
+      <div class="card">
+        <div class="card-title"><span class="card-title-dot"></span>現在の取り組み</div>
+        <div class="learn-list">
           <div class="learn-item">
             <div class="learn-dot"></div>
-            <div>AWS（SAA資格取得に向けた学習）</div>
+            <div>AWS SAA 資格取得に向けた学習</div>
           </div>
           <div class="learn-item">
             <div class="learn-dot"></div>
             <div>Claude を活用したAI活用スキルの習得</div>
           </div>
-        </div>
-        <div class="learn-card">
-          <div class="learn-card-label">個人プロジェクト</div>
           <div class="learn-item">
             <div class="learn-dot"></div>
             <div>AWS上でのオンプレNW環境構築（EC2・VPC・VPN）</div>
@@ -617,48 +563,30 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- 目指すエンジニア像 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon">🎯</div>
-        <div class="card-title">目指すエンジニア像</div>
-      </div>
-      <div class="goal-card">
-        <div class="goal-title">オンプレミス × クラウドをつなぐ<br>ネットワーク・クラウド戦略エンジニア</div>
-        <div class="goal-desc">
-          10年以上のFW運用・構築経験を軸に、AWSなどクラウド技術を組み合わせ、
-          オンプレとクラウドをシームレスに連携させるインフラ設計・提案ができるエンジニアを目指しています。
-          AIツールの活用も取り入れながら、運用効率の向上にも貢献していきます。
+      <!-- 基本情報 -->
+      <div class="card">
+        <div class="card-title"><span class="card-title-dot"></span>基本情報</div>
+        <div class="info-list">
+          <div class="info-row">
+            <div class="info-key">最寄駅</div>
+            <div class="info-val">小田急線 湘南台駅</div>
+          </div>
+          <div class="info-row">
+            <div class="info-key">学歴</div>
+            <div class="info-val">専門学卒<br>（高度情報処理学科）</div>
+          </div>
+          <div class="info-row">
+            <div class="info-key">趣味</div>
+            <div class="info-val">バイク・ドライブ<br>映画鑑賞、ゲーム</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- 基本情報 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon">📝</div>
-        <div class="card-title">基本情報</div>
-      </div>
-      <div class="info-rows">
-        <div class="info-row">
-          <div class="info-key">最寄駅</div>
-          <div class="info-val">小田急線 湘南台駅（神奈川県藤沢市）</div>
-        </div>
-        <div class="info-row">
-          <div class="info-key">最終学歴</div>
-          <div class="info-val">専門学卒（高度情報処理学科）</div>
-        </div>
-        <div class="info-row">
-          <div class="info-key">趣味</div>
-          <div class="info-val">バイク・ドライブ、映画鑑賞、ゲーム</div>
-        </div>
-      </div>
     </div>
-
-    <div class="footer">© 廣川生成</div>
   </div>
+
+  <footer>© 廣川生成</footer>
 
 </body>
 </html>

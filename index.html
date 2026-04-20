@@ -3,281 +3,297 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>廣川生成 - インフラエンジニア</title>
+  <title>廣川生成 — Network Engineer</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #f2f2f0;
+      --white:      #ffffff;
+      --text:       #1a1a1a;
+      --text-sub:   #555555;
+      --text-muted: #999999;
+      --border:     #e0e0dc;
+      --shadow:     0 1px 3px rgba(0,0,0,0.05), 0 8px 28px rgba(0,0,0,0.05);
+    }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-      background: #f0f2f5;
-      color: #1a1a2e;
-      min-height: 100vh;
-      line-height: 1.6;
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
     }
 
-    /* ── Top accent bar ── */
-    .top-bar {
-      height: 5px;
-      background: linear-gradient(90deg, #4f6ef7, #38bdf8);
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(.22,.68,0,1.1), transform 0.65s cubic-bezier(.22,.68,0,1.1);
     }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
 
     /* ── Hero ── */
     .hero {
-      background: #fff;
-      border-bottom: 1px solid #e8eaed;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 5.5rem 2rem 4.5rem;
     }
 
     .hero-inner {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 2.5rem 1.5rem 2rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 1.75rem;
     }
 
-    .avatar {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #4f6ef7, #38bdf8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
+    .hero-eyebrow {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 11px;
       font-weight: 700;
-      color: #fff;
-      flex-shrink: 0;
-      box-shadow: 0 4px 16px rgba(79,110,247,0.3);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
     }
-
-    .hero-info { flex: 1; }
 
     .hero-name {
-      font-size: 24px;
-      font-weight: 700;
-      color: #111827;
-      margin-bottom: 4px;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 0.4rem;
     }
 
-    .hero-title {
-      font-size: 13px;
-      color: #4f6ef7;
-      font-weight: 600;
-      letter-spacing: 0.06em;
+    .hero-role {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-divider {
+      width: 36px;
+      height: 2px;
+      background: var(--text);
+      margin-bottom: 2rem;
     }
 
     .hero-tagline {
-      font-size: 14px;
-      color: #6b7280;
-      line-height: 1.75;
-      margin-bottom: 14px;
-      max-width: 520px;
+      font-size: 15px;
+      color: var(--text-sub);
+      max-width: 480px;
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
     }
 
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 1.5rem;
     }
 
     .hero-meta-item {
+      font-size: 12px;
+      color: var(--text-muted);
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-size: 13px;
-      color: #9ca3af;
+      gap: 6px;
     }
 
-    .hero-meta-icon {
-      font-size: 14px;
-    }
-
-    /* ── Layout ── */
-    .layout {
-      max-width: 800px;
+    /* ── Container ── */
+    .container {
+      max-width: 900px;
       margin: 0 auto;
-      padding: 1.5rem 1.5rem 4rem;
-      display: grid;
-      grid-template-columns: 1fr 260px;
-      gap: 1.25rem;
-      align-items: start;
+      padding: 4.5rem 2rem 7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
     }
 
-    @media (max-width: 640px) {
-      .layout { grid-template-columns: 1fr; }
-      .hero-inner { flex-direction: column; align-items: center; text-align: center; }
-      .hero-meta { justify-content: center; }
+    /* ── Section ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
     }
 
-    .main-col { display: flex; flex-direction: column; gap: 1.25rem; }
-    .side-col { display: flex; flex-direction: column; gap: 1.25rem; }
+    .section-label {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
 
     /* ── Card ── */
     .card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
-    }
-
-    .card-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #374151;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 1.1rem;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #f3f4f6;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .card-title-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #4f6ef7;
-      flex-shrink: 0;
+      background: var(--white);
+      border-radius: 14px;
+      padding: 2rem 2.25rem;
+      box-shadow: var(--shadow);
     }
 
     /* ── Self PR ── */
     .pr-text {
-      font-size: 14px;
-      color: #4b5563;
-      line-height: 1.85;
-      background: #f8f9ff;
-      border-left: 3px solid #4f6ef7;
-      border-radius: 0 8px 8px 0;
-      padding: 12px 16px;
+      font-size: 15px;
+      color: var(--text-sub);
+      line-height: 1.95;
+      border-left: 2px solid var(--text);
+      padding-left: 1.25rem;
     }
 
     /* ── Skills ── */
-    .skill-group { margin-bottom: 1.1rem; }
+    .skill-group { margin-bottom: 1.5rem; }
     .skill-group:last-child { margin-bottom: 0; }
 
     .skill-group-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #9ca3af;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-bottom: 8px;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
     }
 
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
     .skill-tag {
-      background: #f3f4f6;
-      border: 1px solid #e5e7eb;
-      border-radius: 6px;
-      padding: 5px 12px;
       font-size: 12px;
       font-weight: 500;
-      color: #374151;
+      padding: 5px 14px;
+      border-radius: 5px;
+      background: var(--bg);
+      color: var(--text-sub);
+      border: 1px solid var(--border);
     }
 
     .skill-tag.primary {
-      background: #eff2ff;
-      border-color: #c7d2fe;
-      color: #4338ca;
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
     }
 
     /* ── Timeline ── */
-    .timeline { display: flex; flex-direction: column; }
-
     .tl-item {
       position: relative;
-      padding-left: 1.5rem;
-      padding-bottom: 1.5rem;
+      padding-left: 1.75rem;
+      padding-bottom: 2rem;
     }
-
     .tl-item:last-child { padding-bottom: 0; }
 
     .tl-item::before {
       content: '';
       position: absolute;
-      left: 5px; top: 14px; bottom: 0;
+      left: 6px; top: 18px; bottom: 0;
       width: 1px;
-      background: #e5e7eb;
+      background: var(--border);
     }
-
     .tl-item:last-child::before { display: none; }
 
     .tl-dot {
       position: absolute;
-      left: 0; top: 6px;
-      width: 12px; height: 12px;
+      left: 0; top: 8px;
+      width: 13px; height: 13px;
       border-radius: 50%;
-      background: #4f6ef7;
-      border: 2px solid #fff;
-      box-shadow: 0 0 0 2px #c7d2fe;
+      background: var(--white);
+      border: 2px solid var(--text);
     }
 
     .tl-period {
+      font-family: 'Courier New', Courier, monospace;
       font-size: 11px;
-      color: #9ca3af;
-      margin-bottom: 3px;
-      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 5px;
     }
 
     .tl-company {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 700;
-      color: #111827;
-      margin-bottom: 2px;
+      color: var(--text);
+      margin-bottom: 4px;
     }
 
     .tl-role {
-      font-size: 12px;
-      color: #6b7280;
-      margin-bottom: 7px;
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 10px;
     }
 
     .tl-desc {
-      font-size: 12px;
-      color: #6b7280;
-      line-height: 1.7;
-      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 12px;
     }
 
-    .tl-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
     .tl-tag {
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      border-radius: 4px;
-      padding: 2px 8px;
       font-size: 11px;
-      color: #9ca3af;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: var(--bg);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
     }
 
-    /* ── Sidebar: Certs ── */
-    .cert-list { display: flex; flex-direction: column; gap: 8px; }
+    /* ── Goal ── */
+    .goal-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
 
+    .goal-desc {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.9;
+    }
+
+    /* ── Two-column grid ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 580px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    /* ── Certs ── */
     .cert-item {
-      background: #f9fafb;
-      border: 1px solid #f3f4f6;
-      border-radius: 8px;
-      padding: 10px 12px;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
     }
+    .cert-item:first-child { padding-top: 0; }
+    .cert-item:last-child { border-bottom: none; padding-bottom: 0; }
 
     .cert-name {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
-      color: #1f2937;
-      margin-bottom: 4px;
+      color: var(--text);
+      margin-bottom: 5px;
     }
 
     .cert-foot {
@@ -287,138 +303,143 @@
     }
 
     .cert-date {
+      font-family: 'Courier New', Courier, monospace;
       font-size: 11px;
-      color: #9ca3af;
+      color: var(--text-muted);
     }
 
     .cert-badge {
       font-size: 10px;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 2px 10px;
       border-radius: 999px;
-      background: #eff2ff;
-      color: #4338ca;
+      background: var(--text);
+      color: #fff;
     }
 
     .cert-badge.planned {
-      background: #fff7ed;
-      color: #c2410c;
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
     }
 
-    /* ── Sidebar: Learning ── */
-    .learn-list { display: flex; flex-direction: column; gap: 8px; }
-
+    /* ── Learning ── */
     .learn-item {
       display: flex;
       align-items: flex-start;
-      gap: 8px;
+      gap: 12px;
+      padding: 0.9rem 0;
       font-size: 13px;
-      color: #4b5563;
-      line-height: 1.5;
+      color: var(--text-sub);
+      border-bottom: 1px solid var(--border);
+      line-height: 1.55;
     }
+    .learn-item:first-child { padding-top: 0; }
+    .learn-item:last-child { border-bottom: none; padding-bottom: 0; }
 
-    .learn-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #4f6ef7;
-      margin-top: 7px;
-      flex-shrink: 0;
-    }
-
-    /* ── Goal card ── */
-    .goal-box {
-      background: linear-gradient(135deg, #eff2ff, #f0f9ff);
-      border: 1px solid #c7d2fe;
-      border-radius: 10px;
-      padding: 1rem 1.1rem;
-    }
-
-    .goal-title {
-      font-size: 13px;
+    .learn-num {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 10px;
       font-weight: 700;
-      color: #3730a3;
-      margin-bottom: 7px;
-      line-height: 1.5;
+      color: var(--text-muted);
+      padding-top: 2px;
+      min-width: 18px;
     }
 
-    .goal-desc {
-      font-size: 12px;
-      color: #6366f1;
-      line-height: 1.75;
-    }
-
-    /* ── Basic info ── */
-    .info-list { display: flex; flex-direction: column; gap: 8px; }
-
+    /* ── Info ── */
     .info-row {
       display: flex;
-      gap: 10px;
-      font-size: 13px;
+      gap: 1.5rem;
+      padding: 0.9rem 0;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
     }
+    .info-row:first-child { padding-top: 0; }
+    .info-row:last-child { border-bottom: none; padding-bottom: 0; }
 
     .info-key {
-      color: #9ca3af;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
       min-width: 64px;
-      flex-shrink: 0;
-      font-weight: 500;
+      padding-top: 3px;
     }
 
-    .info-val { color: #374151; }
+    .info-val {
+      color: var(--text-sub);
+      line-height: 1.7;
+    }
 
     /* ── Footer ── */
     footer {
       text-align: center;
-      padding: 2rem 0;
+      padding: 3rem 0;
       font-size: 12px;
-      color: #d1d5db;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .hero { padding: 3.5rem 1.5rem 3rem; }
+      .container { padding: 3rem 1.5rem 5rem; }
+      .card { padding: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <div class="top-bar"></div>
-
   <!-- Hero -->
   <div class="hero">
     <div class="hero-inner">
-      <div class="avatar">廣</div>
-      <div class="hero-info">
-        <div class="hero-name">廣川 生成</div>
-        <div class="hero-title">Network &amp; Infrastructure Engineer</div>
-        <p class="hero-tagline">
-          ファイアウォール運用・構築を軸に10年以上の実績。<br>
-          オンプレミスとクラウドをつなぐインフラエンジニアを目指しています。
-        </p>
-        <div class="hero-meta">
-          <span class="hero-meta-item"><span class="hero-meta-icon">📍</span>神奈川県藤沢市</span>
-          <span class="hero-meta-item"><span class="hero-meta-icon">🎓</span>専門学卒（高度情報処理学科）</span>
-          <span class="hero-meta-item"><span class="hero-meta-icon">💼</span>フリーランス</span>
-        </div>
+      <div class="hero-eyebrow">Portfolio — Self Introduction</div>
+      <h1 class="hero-name">廣川 生成</h1>
+      <div class="hero-role">Network &amp; Infrastructure Engineer</div>
+      <div class="hero-divider"></div>
+      <p class="hero-tagline">
+        ファイアウォール運用・構築を軸に10年以上の実績。<br>
+        オンプレミスとクラウドをつなぐインフラエンジニアを目指しています。
+      </p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">📍 神奈川県藤沢市</span>
+        <span class="hero-meta-item">🎓 専門学卒（高度情報処理学科）</span>
+        <span class="hero-meta-item">💼 フリーランス</span>
       </div>
     </div>
   </div>
 
   <!-- Content -->
-  <div class="layout">
+  <div class="container">
 
-    <!-- メインカラム -->
-    <div class="main-col">
-
-      <!-- 自己PR -->
+    <!-- About -->
+    <div class="reveal">
+      <div class="section-header">
+        <span class="section-label">About</span>
+        <div class="section-line"></div>
+      </div>
       <div class="card">
-        <div class="card-title"><span class="card-title-dot"></span>自己PR</div>
         <p class="pr-text">
           持前の観察力でコミュニケーションを図り、積極的に知識と技術を習得します。<br>
           運用業務で培った「なぜ動かないか」を追う姿勢を、構築・改善にも活かしています。
         </p>
       </div>
+    </div>
 
-      <!-- スキル -->
+    <!-- Skills -->
+    <div class="reveal">
+      <div class="section-header">
+        <span class="section-label">Skills</span>
+        <div class="section-line"></div>
+      </div>
       <div class="card">
-        <div class="card-title"><span class="card-title-dot"></span>スキル</div>
-
         <div class="skill-group">
-          <div class="skill-group-label">ファイアウォール</div>
+          <div class="skill-group-label">Firewall</div>
           <div class="skill-tags">
             <span class="skill-tag primary">Paloalto</span>
             <span class="skill-tag primary">Fortigate</span>
@@ -426,9 +447,8 @@
             <span class="skill-tag">Juniper SSG</span>
           </div>
         </div>
-
         <div class="skill-group">
-          <div class="skill-group-label">ネットワーク</div>
+          <div class="skill-group-label">Network</div>
           <div class="skill-tags">
             <span class="skill-tag">Cisco ルータ／スイッチ</span>
             <span class="skill-tag">Alaxala L2SW</span>
@@ -437,9 +457,8 @@
             <span class="skill-tag">VPN</span>
           </div>
         </div>
-
         <div class="skill-group">
-          <div class="skill-group-label">クラウド / OS / その他</div>
+          <div class="skill-group-label">Cloud / OS / Other</div>
           <div class="skill-tags">
             <span class="skill-tag">AWS（EC2・VPC・VPN）</span>
             <span class="skill-tag">Linux（CentOS / Ubuntu）</span>
@@ -448,75 +467,77 @@
           </div>
         </div>
       </div>
-
-      <!-- 職歴 -->
-      <div class="card">
-        <div class="card-title"><span class="card-title-dot"></span>職歴</div>
-        <div class="timeline">
-
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-period">2016/3 〜 現在</div>
-            <div class="tl-company">某大手ネットワーク会社</div>
-            <div class="tl-role">ネットワーク運用・構築業務（メンバー）</div>
-            <div class="tl-desc">
-              FWポリシー運用・改廃、通信不具合の調査対応、機器更新時のポリシー全面精査、
-              Fortigate構築（パラメータシート作成〜検証）、セキュリティ審査対応、
-              不要ポリシー棚卸、運用改善（審査チェックリスト整備）
-            </div>
-            <div class="tl-tags">
-              <span class="tl-tag">Paloalto</span>
-              <span class="tl-tag">Fortigate</span>
-              <span class="tl-tag">FortiManager</span>
-              <span class="tl-tag">SSG</span>
-              <span class="tl-tag">Alaxala L2SW</span>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-period">2015/9 〜 2016/3</div>
-            <div class="tl-company">某病院 移転に伴うNW構築</div>
-            <div class="tl-role">概要設計・提案書作成サポート（メンバー）</div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-period">2015/4 〜 2015/8</div>
-            <div class="tl-company">某ネットワーク会社</div>
-            <div class="tl-role">ネットワーク・Linuxサーバ基礎研修</div>
-            <div class="tl-tags">
-              <span class="tl-tag">Cisco</span>
-              <span class="tl-tag">Linux (CentOS6)</span>
-              <span class="tl-tag">Apache / DNS / Mail</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- 目指すエンジニア像 -->
-      <div class="card">
-        <div class="card-title"><span class="card-title-dot"></span>目指すエンジニア像</div>
-        <div class="goal-box">
-          <div class="goal-title">オンプレミス × クラウドをつなぐ、ネットワーク・クラウド戦略エンジニア</div>
-          <div class="goal-desc">
-            10年以上のFW運用・構築経験を軸に、AWSなどクラウド技術を組み合わせ、
-            オンプレとクラウドをシームレスに連携させるインフラ設計・提案ができるエンジニアを目指しています。
-            AIツールの活用も取り入れながら、運用効率の向上にも貢献していきます。
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <!-- サイドカラム -->
-    <div class="side-col">
-
-      <!-- 資格 -->
+    <!-- Career -->
+    <div class="reveal">
+      <div class="section-header">
+        <span class="section-label">Career</span>
+        <div class="section-line"></div>
+      </div>
       <div class="card">
-        <div class="card-title"><span class="card-title-dot"></span>資格</div>
-        <div class="cert-list">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-period">2016/3 〜 現在</div>
+          <div class="tl-company">某大手ネットワーク会社</div>
+          <div class="tl-role">ネットワーク運用・構築業務（メンバー）</div>
+          <div class="tl-desc">
+            FWポリシー運用・改廃、通信不具合の調査対応、機器更新時のポリシー全面精査、
+            Fortigate構築（パラメータシート作成〜検証）、セキュリティ審査対応、
+            不要ポリシー棚卸、運用改善（審査チェックリスト整備）
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">Paloalto</span>
+            <span class="tl-tag">Fortigate</span>
+            <span class="tl-tag">FortiManager</span>
+            <span class="tl-tag">SSG</span>
+            <span class="tl-tag">Alaxala L2SW</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-period">2015/9 〜 2016/3</div>
+          <div class="tl-company">某病院 移転に伴うNW構築</div>
+          <div class="tl-role">概要設計・提案書作成サポート（メンバー）</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-period">2015/4 〜 2015/8</div>
+          <div class="tl-company">某ネットワーク会社</div>
+          <div class="tl-role">ネットワーク・Linuxサーバ基礎研修</div>
+          <div class="tl-tags">
+            <span class="tl-tag">Cisco</span>
+            <span class="tl-tag">Linux (CentOS6)</span>
+            <span class="tl-tag">Apache / DNS / Mail</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vision -->
+    <div class="reveal">
+      <div class="section-header">
+        <span class="section-label">Vision</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="card">
+        <div class="goal-title">オンプレミス × クラウドをつなぐ、<br>ネットワーク・クラウド戦略エンジニア</div>
+        <div class="goal-desc">
+          10年以上のFW運用・構築経験を軸に、AWSなどクラウド技術を組み合わせ、
+          オンプレとクラウドをシームレスに連携させるインフラ設計・提案ができるエンジニアを目指しています。
+          AIツールの活用も取り入れながら、運用効率の向上にも貢献していきます。
+        </div>
+      </div>
+    </div>
+
+    <!-- Certifications + Learning -->
+    <div class="grid-2 reveal">
+      <div>
+        <div class="section-header">
+          <span class="section-label">Certifications</span>
+          <div class="section-line"></div>
+        </div>
+        <div class="card">
           <div class="cert-item">
             <div class="cert-name">CCNA</div>
             <div class="cert-foot">
@@ -540,53 +561,72 @@
           </div>
         </div>
       </div>
-
-      <!-- 現在の取り組み -->
-      <div class="card">
-        <div class="card-title"><span class="card-title-dot"></span>現在の取り組み</div>
-        <div class="learn-list">
+      <div>
+        <div class="section-header">
+          <span class="section-label">Learning</span>
+          <div class="section-line"></div>
+        </div>
+        <div class="card">
           <div class="learn-item">
-            <div class="learn-dot"></div>
+            <span class="learn-num">01</span>
             <div>AWS SAA 資格取得に向けた学習</div>
           </div>
           <div class="learn-item">
-            <div class="learn-dot"></div>
+            <span class="learn-num">02</span>
             <div>Claude を活用したAI活用スキルの習得</div>
           </div>
           <div class="learn-item">
-            <div class="learn-dot"></div>
+            <span class="learn-num">03</span>
             <div>AWS上でのオンプレNW環境構築（EC2・VPC・VPN）</div>
           </div>
           <div class="learn-item">
-            <div class="learn-dot"></div>
+            <span class="learn-num">04</span>
             <div>Python + PostgreSQL による気象データ収集システム</div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- 基本情報 -->
+    <!-- Info -->
+    <div class="reveal">
+      <div class="section-header">
+        <span class="section-label">Info</span>
+        <div class="section-line"></div>
+      </div>
       <div class="card">
-        <div class="card-title"><span class="card-title-dot"></span>基本情報</div>
-        <div class="info-list">
-          <div class="info-row">
-            <div class="info-key">最寄駅</div>
-            <div class="info-val">小田急線 湘南台駅</div>
-          </div>
-          <div class="info-row">
-            <div class="info-key">学歴</div>
-            <div class="info-val">専門学卒<br>（高度情報処理学科）</div>
-          </div>
-          <div class="info-row">
-            <div class="info-key">趣味</div>
-            <div class="info-val">バイク・ドライブ<br>映画鑑賞、ゲーム</div>
-          </div>
+        <div class="info-row">
+          <div class="info-key">最寄駅</div>
+          <div class="info-val">小田急線 湘南台駅</div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">学歴</div>
+          <div class="info-val">専門学卒（高度情報処理学科）</div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">趣味</div>
+          <div class="info-val">バイク・ドライブ、映画鑑賞、ゲーム</div>
         </div>
       </div>
-
     </div>
+
   </div>
 
-  <footer>© 廣川生成 ｜ <a href="https://hirokawak-cr.github.io/jikosyoukai/" style="color:#d1d5db;">https://hirokawak-cr.github.io/jikosyoukai/</a></footer>
+  <footer>
+    © 廣川生成 ｜ <a href="https://hirokawak-cr.github.io/jikosyoukai/">https://hirokawak-cr.github.io/jikosyoukai/</a>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
